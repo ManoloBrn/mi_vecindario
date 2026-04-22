@@ -1,0 +1,74 @@
+# ── Python ────────────────────────────────────────────────────────────────────
+__pycache__/
+*.py[codz]
+*.so
+*.egg-info/
+MANIFEST
+pip-log.txt
+htmlcov/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+.pytest_cache/
+*.mo
+*.pot
+local_settings.py
+.webassets-cache
+.scrapy
+docs/_build/
+.ipynb_checkpoints
+__pypackages__/
+celerybeat-schedule
+celerybeat.pid
+.mypy_cache/
+.dmypy.json
+dmypy.json
+.pyre/
+.pytype/
+cython_debug/
+.ruff_cache/
+.pypirc
+
+# ── Flask / backend ───────────────────────────────────────────────────────────
+instance/
+*.db
+*.sqlite3
+
+# ── Virtual environments ──────────────────────────────────────────────────────
+.venv
+venv/
+env/
+ENV/
+
+# ── Node / frontend ───────────────────────────────────────────────────────────
+node_modules/
+npm-debug.log*
+*.log
+
+# ── Build output ──────────────────────────────────────────────────────────────
+dist/
+build/
+
+# ── Editor / tooling ─────────────────────────────────────────────────────────
+.claude/
+.idea/
+.vscode/
+.cursorignore
+.abstra/
+
+# ── OS ────────────────────────────────────────────────────────────────────────
+.DS_Store
+Thumbs.db
+
+# ── Local env ────────────────────────────────────────────────────────────────
+.env
+.env.local
+.env.*.local
+.envrc
+
+# ── Misc ─────────────────────────────────────────────────────────────────────
+*.zip
+extracted/
