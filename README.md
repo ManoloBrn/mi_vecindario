@@ -114,4 +114,4 @@ This project was built as a rapid prototype during a one-day hackathon. It is in
 
 ## License
 
-MIT
+[GNU Affero General Public License v3.0](LICENSE)
