@@ -1,3 +1,7 @@
+import { mockApi } from './api.mock.js';
+
+const DEMO = import.meta.env.VITE_DEMO_MODE === 'true';
+
 const BASE = 'http://localhost:8000';
 
 function getToken() {
@@ -27,7 +31,7 @@ async function request(method, path, body = null) {
   return data;
 }
 
-export const api = {
+const realApi = {
   // ── Auth ────────────────────────────────────────────────────────────────
   requestOtp:   (phone)                   => request('POST', '/api/auth/request-otp', { phone }),
   verifyOtp:    (phone, otp)              => request('POST', '/api/auth/verify-otp',  { phone, otp }),
@@ -61,3 +65,5 @@ export const api = {
   getConfirmedReports:      ()            => request('GET', '/api/users/me/confirmed-reports'),
   updateFollowedCategories: (categories)  => request('PUT', '/api/users/me/followed-categories', { categories }),
 };
+
+export const api = DEMO ? mockApi : realApi;

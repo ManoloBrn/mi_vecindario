@@ -40,6 +40,7 @@ export function LoginA({ onDone }) {
 
   const [nickname, setNickname] = useState('');
   const [avatarColor, setAvatarColor] = useState('#2E7D5B');
+  const [demoOtp, setDemoOtp]   = useState('');
   const [loading, setLoading]   = useState(false);
   const [error, setError]       = useState('');
 
@@ -53,7 +54,8 @@ export function LoginA({ onDone }) {
   const handleRequestOtp = async () => {
     setLoading(true); setError('');
     try {
-      await api.requestOtp('+52' + phone);
+      const res = await api.requestOtp('+52' + phone);
+      setDemoOtp(res.demo_otp || '');
       setStep('code');
     } catch (e) {
       setError(e.message || 'Error al enviar código');
@@ -136,7 +138,7 @@ export function LoginA({ onDone }) {
         {step === 'code'     && (
           <CodePanel
             phone={phone} code={code} setCode={setCode}
-            loading={loading} onNext={handleVerifyOtp}
+            demoOtp={demoOtp} loading={loading} onNext={handleVerifyOtp}
           />
         )}
         {step === 'nickname' && (
@@ -250,7 +252,7 @@ function PhonePanel({ phone, setPhone, loading, onNext }) {
   );
 }
 
-function CodePanel({ phone, code, setCode, loading, onNext }) {
+function CodePanel({ phone, code, setCode, demoOtp, loading, onNext }) {
   const digits = code.padEnd(6, ' ').split('');
 
   useEffect(() => {
@@ -293,9 +295,18 @@ function CodePanel({ phone, code, setCode, loading, onNext }) {
         />
       </div>
 
-      <div style={{ fontSize: 12, color: 'var(--color-ink-3)', textAlign: 'center', padding: '8px 0' }}>
-        En modo demo el código aparece en la consola del backend.
-      </div>
+      {demoOtp && (
+        <div
+          onClick={() => setCode(demoOtp)}
+          style={{
+            fontSize: 13, color: 'var(--color-primary)', fontWeight: 600,
+            textAlign: 'center', padding: '8px', cursor: 'pointer',
+            background: 'var(--color-primary-soft)', borderRadius: 10,
+          }}
+        >
+          Demo: toca para autocompletar → {demoOtp}
+        </div>
+      )}
 
       <div style={{ flex: 1 }}/>
 
